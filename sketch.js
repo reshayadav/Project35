@@ -11,19 +11,25 @@ function preload()
 }
 
 function setup() {
-	createCanvas(500 ,500);
- 
-  dog.addImage(dogImg);
+  createCanvas(500 ,500);
+  
   database = firebase.database;
-  // foodStock = database.ref("food");
-  // foodStock.on("value", readStock);
+ 
+  dog = createSprite(250,250);
+  dog.scale = 0.3;
+  dog.addImage(dogImg);
+ 
+
+  
+  foodStock = database.ref("food");
+  foodStock.on("value", readStock);
 }
 
 
 function draw() {  
 background(46,139,87);
 
-// image(dogImg,200,200,150,140);
+
 
 
  if(keyWentDown(UP_ARROW)){
@@ -42,7 +48,9 @@ background(46,139,87);
 }
 
 function writeStock(x){
- 
+  database.ref("food").update({
+    food:x
+  })
 }
 
 
