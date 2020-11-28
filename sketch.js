@@ -13,7 +13,7 @@ function preload()
 function setup() {
   createCanvas(500 ,500);
   
-  database = firebase.database;
+  database = firebase.database();
  
   dog = createSprite(250,250);
   dog.scale = 0.3;
@@ -48,6 +48,16 @@ background(46,139,87);
 }
 
 function writeStock(x){
+ 
+
+  if(x <= 0){
+    x=0;
+  }
+
+  else{
+    x=x -1;
+  }
+
   database.ref("food").update({
     food:x
   })
